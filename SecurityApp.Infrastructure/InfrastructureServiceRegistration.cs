@@ -13,7 +13,9 @@ namespace SecurityApp.Infrastructure
         {
             services.AddDbContext<SecurityAppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("ConnectionString")));
 
-            services.AddScoped(typeof(IAsyncRepository<>), typeof(AsyncRepository<>));
+            services.AddScoped(typeof(IAsyncRepository<>), typeof(AsyncRepository<>));  
+            services.AddScoped<IAnimalRepository, AnimalRepository>();
+
 
             return services;
 
