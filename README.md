@@ -12,7 +12,7 @@ add-migration -context SecurityAppDbContext firstMigration
 
 
 # Execute this command
-update-databse
+update-database
 
 
 # In the console select Default project, select SecurityApp.Identity
@@ -22,4 +22,4 @@ add-migration -context IdentityTestDbContext firstMigration
 
 
 # Execute this command
-update-databse
+update-database
