@@ -18,9 +18,4 @@
 		<ProjectReference Include="..\SecurityApp.Domain\SecurityApp.Domain.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Features\Examen\" />
-	  <Folder Include="Features\Vacuna\" />
-	</ItemGroup>
-
 </Project>
