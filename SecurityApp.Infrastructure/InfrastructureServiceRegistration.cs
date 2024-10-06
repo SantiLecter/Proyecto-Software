@@ -15,8 +15,11 @@ namespace SecurityApp.Infrastructure
 
             services.AddScoped(typeof(IAsyncRepository<>), typeof(AsyncRepository<>));  
             services.AddScoped<IAnimalRepository, AnimalRepository>();
-
-
+            services.AddScoped<ICuidadoRepository, CuidadoRepository>();
+            services.AddScoped<ICuidadorRepository, CuidadorRepository>();
+            services.AddScoped<IExamenRepository, ExamenRepository>();
+            services.AddScoped<IVacunaRepository, VacunaRepository>();
+            
             return services;
 
         }

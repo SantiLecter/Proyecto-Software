@@ -10,6 +10,12 @@ namespace SecurityApp.Infrastructure.Persistence
         public SecurityAppDbContext(DbContextOptions<SecurityAppDbContext> options) : base(options)
         {
         }
+        
+        public DbSet<Animal>? Animals { get; set; }
+        public DbSet<Cuidado>? Cuidados { get; set; }
+        public DbSet<Cuidador>? Cuidadores { get; set; }
+        public DbSet<Examen>? Examenes { get; set; }
+        public DbSet<Vacuna>? Vacunas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

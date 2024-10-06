@@ -7,7 +7,7 @@ public class Animal : BaseDomain
         public string TipoComida { get; set; } = string.Empty;
         public string EstadoSalud { get; set; } = string.Empty;
         public float Peso { get; set; }
-        public DateTime FechaRegistro { get; set; }
+        public DateTime FechaRegistro { get; set; } = DateTime.Now;
         public virtual ICollection<Vacuna> Vacunas { get; set; }
         public virtual ICollection<Examen> Examenes { get; set; }
         public virtual ICollection<Cuidado> Cuidados { get; set; }

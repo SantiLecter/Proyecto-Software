@@ -19,8 +19,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Features\Cuidador\" />
-	  <Folder Include="Features\Cuidado\" />
 	  <Folder Include="Features\Examen\" />
 	  <Folder Include="Features\Vacuna\" />
 	</ItemGroup>
