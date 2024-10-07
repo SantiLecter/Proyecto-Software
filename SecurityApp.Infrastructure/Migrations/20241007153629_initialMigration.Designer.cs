@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SecurityApp.Infrastructure.Persistence;
 
@@ -11,9 +12,10 @@ using SecurityApp.Infrastructure.Persistence;
 namespace SecurityApp.Infrastructure.Migrations
 {
     [DbContext(typeof(SecurityAppDbContext))]
-    partial class SecurityAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241007153629_initialMigration")]
+    partial class initialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

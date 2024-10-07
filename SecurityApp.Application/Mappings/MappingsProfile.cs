@@ -8,6 +8,8 @@ using SecurityApp.Application.Features.Cuidado.Queries;
 using SecurityApp.Application.Features.Cuidador.Commands.CreateCuidador;
 using SecurityApp.Application.Features.Cuidador.Commands.DeleteCuidador;
 using SecurityApp.Application.Features.Cuidador.Commands.UpdateCuidador;
+using SecurityApp.Application.Features.Cuidador.Queries;
+using SecurityApp.Application.Features.Cuidador.Queries.GetListCuidadores;
 using SecurityApp.Application.Features.Examen.Commands.CreateExamen;
 using SecurityApp.Application.Features.Examen.Commands.DeleteExamen;
 using SecurityApp.Application.Features.Examen.Commands.UpdateExamen;
@@ -30,19 +32,18 @@ namespace SecurityApp.Application.Mappings
             CreateMap<Cuidado, CuidadoVm>();
             CreateMap<CreateCuidadoCommand, Cuidado>();
 
-            CreateMap<Cuidador, CuidadoVm>();
-            CreateMap<CreateCuidadorCommand, Cuidado>();
-            CreateMap<UpdateCuidadorCommand, Cuidado>();
-            CreateMap<DeleteCuidadorCommand, Cuidado>();
+            CreateMap<Cuidador, CuidadorVm>();
+            CreateMap<CreateCuidadorCommand, Cuidador>();
+            CreateMap<UpdateCuidadorCommand, Cuidador>();
+            CreateMap<DeleteCuidadorCommand, Cuidador>();
 
             CreateMap<Examen, ExamenVm>();
             CreateMap<CreateExamenCommand, Examen>();
             CreateMap<UpdateExamenCommand, Examen>();
             CreateMap<DeleteExamenCommand, Examen>();
-            
+
             CreateMap<Vacuna, VacunaVm>();
             CreateMap<CreateVacunaCommand, Vacuna>();
-            
         }
     }
 }

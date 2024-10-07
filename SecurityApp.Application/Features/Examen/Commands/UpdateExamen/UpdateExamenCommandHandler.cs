@@ -8,7 +8,7 @@ public class UpdateExamenCommandHandler : IRequestHandler<UpdateExamenCommand>
 {
     private readonly IExamenRepository _examenRepository;
     private readonly IMapper _mapper;
-    
+
     public UpdateExamenCommandHandler(IExamenRepository examenRepository, IMapper mapper)
     {
         _examenRepository = examenRepository;

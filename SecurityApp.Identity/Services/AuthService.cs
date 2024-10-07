@@ -81,35 +81,29 @@ namespace SecurityApp.Identity.Services
 
         public async Task<RegistrationResponse> Register(RegistrationRequest request)
         {
-            //Validamos que el correo sea unico
+            // Se revisa correo unico
             var existingUser = await _userManager.FindByEmailAsync(request.Email);
-
             if (existingUser != null)
             {
-                var registrationResponseNotFound = new RegistrationResponse
+                return new RegistrationResponse
                 {
                     Status = false,
                     Message = $"El email {request.Email} ya se encuentra registrado"
                 };
-
-                return registrationResponseNotFound;
             }
 
-            //Validamos que el username o NumeroLicencia sea unico
+            // Se valida si el nombre de usuario es unico
             var existing = await _userManager.FindByNameAsync(request.Username);
             if (existing != null)
             {
-                var registrationResponseNotFound = new RegistrationResponse
+                return new RegistrationResponse
                 {
                     Status = false,
                     Message = $"El usuario con identificación {request.Username} ya se encuentra registrado"
-
                 };
-
-                return registrationResponseNotFound;
             }
 
-            //Si el correo es verificado procedemos a registrar sus datos en la bd
+            // Crear el usuario
             var user = new ApplicationUser
             {
                 UserName = request.Username,
@@ -121,19 +115,13 @@ namespace SecurityApp.Identity.Services
                 NormalizedUserName = request.Username,
                 Name = request.Name,
                 UrlPhoto = request.UrlPhoto,
-
             };
 
-            //Creamos el usuario
             var result = await _userManager.CreateAsync(user, request.Password);
 
-            //Si se crea el usuario respondemos al front con los datos del response
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, "user");
-
-
-                //Creamos variable de tipo GenerateToken
                 var token = await GenerateToken(user);
 
                 return new RegistrationResponse
@@ -144,13 +132,16 @@ namespace SecurityApp.Identity.Services
                     Token = new JwtSecurityTokenHandler().WriteToken(token),
                     Status = true,
                     Message = "Registro exitoso"
-
                 };
             }
 
-            throw new Exception($"{result.Errors}");
-
-
+            // Logger de errores
+            var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+            return new RegistrationResponse
+            {
+                Status = false,
+                Message = $"Error en el registro: {errors}"
+            };
         }
 
 

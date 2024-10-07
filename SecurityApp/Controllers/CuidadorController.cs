@@ -1,63 +1,61 @@
-using System.Net;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SecurityApp.Application.Features.Animal.Commands.CreateAnimal;
-using SecurityApp.Application.Features.Animal.Commands.DeleteAnimal;
-using SecurityApp.Application.Features.Animal.Commands.UpdateAnimal;
-using SecurityApp.Application.Features.Animal.Queries;
-using SecurityApp.Application.Features.Animal.Queries.GetAnimalById;
-using SecurityApp.Application.Features.Animal.Queries.GetAnimalsList;
+using SecurityApp.Application.Features.Cuidador.Commands.CreateCuidador;
+using SecurityApp.Application.Features.Cuidador.Commands.UpdateCuidador;
+using SecurityApp.Application.Features.Cuidador.Commands.DeleteCuidador;
+using SecurityApp.Application.Features.Cuidador.Queries.GetListCuidadores;
+using SecurityApp.Application.Features.Cuidador.Queries.GetCuidadorById;
+using System.Net;
+using SecurityApp.Application.Features.Cuidador.Queries;
 
 namespace SecurityApp.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]
-
-public class AnimalController : ControllerBase
+public class CuidadorController : ControllerBase
 {
     private IMediator _mediator;
 
-    public AnimalController(IMediator mediator)
+    public CuidadorController(IMediator mediator)
     {
         _mediator = mediator;
     }
-    
+
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     //[Authorize]
-    public async Task<ActionResult<IEnumerable<AnimalVm>>> GetAllAnimals()
+    public async Task<ActionResult<IEnumerable<CuidadorVm>>> GetAllCuidadores()
     {
-        var query = new GetAnimalsListQuery();
+        var query = new GetListCuidadoresQuery();
         var list = await _mediator.Send(query);
         return Ok(list);
     }
-    
+
     [HttpGet("{id}")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     //[Authorize]
-    public async Task<ActionResult<AnimalVm>> GetAnimalById(string id)
+    public async Task<ActionResult<CuidadorVm>> GetCuidadorByID(string id)
     {
-        var query = new GetAnimalByIdQuery(id);
-        var animal = await _mediator.Send(query);
-        return animal;
+        var query = new GetCuidadorByIdQuery(id);
+        var cuidador = await _mediator.Send(query);
+        return cuidador;
     }
-    
+
     [HttpPost]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     //[Authorize]
-    public async Task<ActionResult<string>> CreateAnimal([FromBody] CreateAnimalCommand command)
+    public async Task<ActionResult<string>> CreateCuidador([FromBody] CreateCuidadorCommand command)
     {
-        var newAnimal = await _mediator.Send(command);
-        return newAnimal;
+        var newCuidador = await _mediator.Send(command);
+        return newCuidador;
     }
-    
+
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]
     //[Authorize]
-    public async Task<ActionResult> UpdateAnimal(string id, [FromBody] UpdateAnimalCommand command)
+    public async Task<ActionResult> UpdateCuidador(string id, [FromBody] UpdateCuidadorCommand command)
     {
         if (id != command.Id)
         {
@@ -73,7 +71,7 @@ public class AnimalController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]
     //[Authorize]
-    public async Task<ActionResult> DeleteAnimal(string id, [FromBody] DeleteAnimalCommand command)
+    public async Task<ActionResult> DeleteCuidador(string id, [FromBody] DeleteCuidadorCommand command)
     {
         if (id != command.Id)
         {
@@ -83,5 +81,4 @@ public class AnimalController : ControllerBase
         await _mediator.Send(command);
         return NoContent();
     }
-
 }
